@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TodoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+//     // view argument based on views folder file name
+// });
+
+Route::get('/', [TodoController::class, 'index']);
+Route::get('create', [TodoController::class, 'create']);
+Route::get('details/{todo}', [TodoController::class, 'details']);
+Route::get('edit/{todo}', [TodoController::class, 'edit']);
+Route::post('update/{todo}', [TodoController::class, 'update']);
+Route::get('delete/{todo}', [TodoController::class, 'delete']);
+
+// sending data to server
+Route::post('store-data', [TodoController::class, 'store']);
