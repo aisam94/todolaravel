@@ -36,14 +36,13 @@ class TodoController extends Controller
 
     public function update(Todo $todo)
     {
-        // try {
-        //     $this->validate(request(), [
-        //         'name' => ['required'],
-        //         'description' => ['required']
-        //     ]);
-        // } catch (ValidationException $e) {
-        //     // capture exceptions
-        // }
+        try {
+            $this->validate(request(), [
+                'name' => ['required'],
+                'description' => ['required']
+            ]);
+        } catch (ValidationException $e) {
+        }
 
         $data = request()->all();
 
