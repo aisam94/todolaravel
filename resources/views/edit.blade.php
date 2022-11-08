@@ -1,7 +1,9 @@
 @extends('layouts.app')
+
 @section('title')
 Edit Todo
 @endsection
+
 @section('content')
 
 <form action="/update/{{$todos->id}}" method="post" class="mt-4 p-4">
@@ -12,7 +14,7 @@ Edit Todo
     </div>
     <div class="form-group m-3">
         <label for="description">Todo Description</label>
-        <textarea class="form-control" rows="3">{{$todos->description}}</textarea>
+        <textarea name="description" class="form-control" rows="3" value="{{$todos->description}}">{{$todos->description}}</textarea>
     </div>
     <div class="form-group m-3">
         <input type="submit" class="btn btn-primary float-end" value="Submit">

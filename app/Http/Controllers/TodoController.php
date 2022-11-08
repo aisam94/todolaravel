@@ -29,32 +29,31 @@ class TodoController extends Controller
         return view('details')->with('todos', $todo);
     }
 
-    public function edit(Todo $todos)
+    public function edit(Todo $todo)
     {
-        return view('edit')->with('todos', $todos);
+        return view('edit')->with('todos', $todo);
     }
 
     public function update(Todo $todo)
     {
-        try {
-            $this->validate(request(), [
-                'name' => ['required'],
-                'description' => ['required']
-            ]);
-        } catch (ValidationException $e) {
-            // capture exceptions
-        }
+        // try {
+        //     $this->validate(request(), [
+        //         'name' => ['required'],
+        //         'description' => ['required']
+        //     ]);
+        // } catch (ValidationException $e) {
+        //     // capture exceptions
+        // }
 
         $data = request()->all();
 
-        $todo = new Todo();
         $todo->name = $data['name'];
         $todo->description = $data['description'];
-        $todo->save(); //
+        $todo->save();
 
-        session()->flash('success', 'Todo updated successfully'); //
+        session()->flash('success', 'Todo updated successfully');
 
-        return redirect('/'); //
+        return redirect('/');
     }
 
     public function delete(Todo $todo)
