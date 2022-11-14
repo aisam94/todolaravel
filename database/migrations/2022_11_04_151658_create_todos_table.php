@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('name'); // add name
             $table->text('description'); // add description
             $table->boolean('isDeleted')->default(false); // for soft delete
+            $table->softDeletes();
         });
     }
 
