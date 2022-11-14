@@ -20,6 +20,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('name'); // add name
             $table->text('description'); // add description
+            $table->boolean('isDeleted')->default(false); // for soft delete
         });
     }
 
