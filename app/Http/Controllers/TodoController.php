@@ -26,7 +26,10 @@ class TodoController extends Controller
 
     public function details(Todo $todo)
     {
-        return view('details')->with('todos', $todo);
+        // both below are the same
+        // like inputing props into components
+        return view('details', ['todos' => $todo]);
+        // return view('details')->with('todos', $todo);
     }
 
     public function edit(Todo $todo)
