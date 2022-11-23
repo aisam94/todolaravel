@@ -91,7 +91,8 @@ class AuthController extends Controller
         // if pass auth, return dashboard view
         // if not redirect to login with message
         if (Auth::check()) {
-            return view('dashboard');
+            $user = Auth::user();
+            return view('dashboard')->with('user',$user);
         }
         return redirect("login")->withSuccess('You are not given access');
     }
