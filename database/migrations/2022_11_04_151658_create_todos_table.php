@@ -16,10 +16,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('todos', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->timestamps();
             $table->string('name'); // add name
             $table->text('description'); // add description
+            $table->uuid('user_id'); // foreign key has to be same type
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
