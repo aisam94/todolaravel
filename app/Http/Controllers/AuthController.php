@@ -14,9 +14,9 @@ class AuthController extends Controller
     public function login()
     {
         // show login view
-        // if already sign in, redirect to dashboard
+        // if already sign in, redirect to frontpage
         if (Auth::check()) {
-            return redirect('dashboard');
+            return redirect('/');
         }
         return view('auth.login');
     }
@@ -31,9 +31,9 @@ class AuthController extends Controller
 
         // set credentials
         $credentials = $request->only('email', 'password');
-        // if successfull, redirect to dashboard
+        // if successfull, redirect to frontpage
         if (Auth::attempt($credentials)) {
-            return redirect()->intended('dashboard')->withSuccess('Signed in');
+            return redirect()->intended()->withSuccess('Signed in');
         }
         // if fail auth
         return redirect('login')->withSuccess('Login details are not valid');
@@ -42,9 +42,9 @@ class AuthController extends Controller
 
     public function register()
     {
-        // if already sign in, redirect to dashboard
+        // if already sign in, redirect to frontpage
         if (Auth::check()) {
-            return redirect('dashboard');
+            return redirect('/');
         }
         return view('auth.register');
     }
@@ -66,9 +66,9 @@ class AuthController extends Controller
 
         // set credentials
         $credentials = $request->only('email', 'password');
-        // if successfull, redirect to dashboard
+        // if successfull, redirect to frontpage
         if (Auth::attempt($credentials)) {
-            return redirect()->intended('dashboard')->withSuccess('Signed in');
+            return redirect()->intended()->withSuccess('Signed in');
         }
 
         // redirect to login page if somehow fail login after registering
@@ -88,7 +88,7 @@ class AuthController extends Controller
 
     public function dashboard()
     {
-        // if pass auth, return dashboard view
+        // if pass auth, go to frontpage
         // if not redirect to login with message
         if (Auth::check()) {
             $user = Auth::user();
