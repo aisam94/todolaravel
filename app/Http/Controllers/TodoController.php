@@ -3,25 +3,30 @@
 namespace App\Http\Controllers;
 
 use Dotenv\Exception\ValidationException;
-use Illuminate\Http\Request;
-use Illuminate\Validation\ValidationData;
 use App\Models\Todo;
-use Symfony\Component\Console\Logger\ConsoleLogger;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class TodoController extends Controller
 {
     public function index()
     {
-        $todo = Todo::all();
         // get all data in todos table
         // interact via model Todo
-        return view('index')->with('todos', $todo);
+        // $todo = Todo::all();
+        if (Auth::check()) {
+            $user = Auth::user();
+            $todo = Todo::where('user_id', '=', $user->id)->get();
+            return view('index')->with('todos', $todo)->with('user', $user);
+        }
+        // return view('index');
+        return redirect('login');
     }
 
     public function create()
     {
         // return view('todos.create');
-        return view('create');
+        return view('create')->with('user', Auth::user());
     }
 
     public function details(Todo $todo)
@@ -82,8 +87,13 @@ class TodoController extends Controller
         // on left is field name in db
         // on the right is field name in form/view
         $todo = new Todo();
+        $todo->id = Str::uuid();
         $todo->name = $data['name'];
         $todo->description = $data['description'];
+
+        $user = Auth::user();
+        $todo->user_id = $user->id;
+
         $todo->save(); // save in database
 
         // display success message

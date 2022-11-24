@@ -23,26 +23,42 @@
 </head>
 
 <body>
-
-    <nav class="navbar navbar-light bg-light">
+    <nav class="navbar navbar-light navbar-expand-lg mb-5" style="background-color: #e3f2fd;">
         <div class="container">
-            @if(session()->has('success'))
+            <!-- @if(session()->has('success'))
             <div class="alert alert-success">
                 {{session()->get('success')}}
             </div>
-            @endif
-            <a href="/"><span class="navbar-brand mb-0 h1">Todo</span></a>
-            <a href="/create"><span class="btn btn-primary">Create Todo</span></a>
+            @endif -->
+            @guest
+            <a class="navbar-brand mr-auto" href="/">Dashboard</a>
+            @else
+            <a class="navbar-brand mr-auto" href="/">{{$user->name}}
+                's Dashboard</a>
+            @endguest
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    @guest
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('register-user') }}">Register</a>
+                    </li>
+                    @else
+                    <li class="nav-item navbar-nav">
+                        <a class="nav-link" href="/create">Create Todo</a>
+                        <a class="nav-link" href="{{ route('signout') }}">Logout</a>
+                    </li>
+                    @endguest
+                </ul>
+            </div>
         </div>
     </nav>
-
     <div class="container">
-
-        <!-- idk what this is tho -->
         @yield('content')
-
     </div>
-
 </body>
 
 </html>
