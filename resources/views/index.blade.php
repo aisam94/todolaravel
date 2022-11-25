@@ -10,7 +10,6 @@ My Todo App
             @guest
             @else
             @foreach($todos as $todo)
-            <!-- need to filter by user_id -->
             <li class="list-group-item">
                 <a href="details/{{$todo->id}}" style="color:cornflower">{{$todo->name}}</a>
             </li>

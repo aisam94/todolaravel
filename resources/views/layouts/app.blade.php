@@ -30,12 +30,12 @@
                 {{session()->get('success')}}
             </div>
             @endif -->
-            @guest
-            <a class="navbar-brand mr-auto" href="/">Dashboard</a>
-            @else
-            <a class="navbar-brand mr-auto" href="/">{{$user->name}}
+            @auth
+            <a class="navbar-brand mr-auto" href="/">{{Auth::user()->name}}
                 's Dashboard</a>
-            @endguest
+            @else
+            <a class="navbar-brand mr-auto" href="/">Dashboard</a>
+            @endauth
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">

@@ -13,7 +13,6 @@ class TodoController extends Controller
     {
         // get all data in todos table
         // interact via model Todo
-        // $todo = Todo::all();
         if (Auth::check()) {
             $user = Auth::user();
             $todo = Todo::where('user_id', '=', $user->id)->get();
@@ -26,7 +25,7 @@ class TodoController extends Controller
     public function create()
     {
         // return view('todos.create');
-        return view('create')->with('user', Auth::user());
+        return view('create');
     }
 
     public function details(Todo $todo)

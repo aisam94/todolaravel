@@ -11,6 +11,7 @@ class Todo extends Model
     // use HasFactory, HasUuids;
     use HasFactory;
 
+    public $incrementing = false; // need to create a uuid model to based upon later
 }
 
 // $todo = Todo::create([]);
